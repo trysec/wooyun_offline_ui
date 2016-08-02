@@ -3,7 +3,7 @@
 花了10分钟重做了一套乌云离线Web UI，重做总共有两个目的，
 
 1. 完全没必要使用网上流行的14GB的虚拟机，mongo 数据导出后，40k漏洞压缩完也只有 100MB 而已（解压导入本地 mongo 后 3.5 GB)
-2. 上述作者没有提取 关注数、是否为有奖励或者漏洞预警的漏洞 等几个字段
+2. 上述作者没有提取 关注数、是否为有奖励或者漏洞预警的漏洞 等几个关键字段
 
 ![alt tag](https://raw.githubusercontent.com/CaledoniaProject/wooyun_offline_ui/master/contrib/screen.jpg)
 
@@ -19,7 +19,7 @@
 cp -R src ~/web/wooyun_offline
 ```
 
-安装前端组件，
+在根目录下安装前端组件，
 
 ```
 bower install bootstrap angularjs jquery angular-paging angularLocalStorage angular-cookies
