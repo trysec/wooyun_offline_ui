@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wooyun 离线</title>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+    <script src="/bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
+    <script src="/bower_components/angular/angular.min.js" charset="utf-8"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="/bower_components/angular-cookies/angular-cookies.min.js" charset="utf-8"></script>
+    <script src="/bower_components/angularLocalStorage/src/angularLocalStorage.js" charset="utf-8"></script>
+    <script src="/bower_components/angular-paging/dist/paging.min.js" charset="utf-8"></script>
+    <style media="screen">
+    .wy_title {
+      max-width: 200px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    </style>
+  </head>
+  <body>
+    <div ng-app="myapp" ng-controller="main">
+      <div class="container-fluid" style="padding-top: 10px; padding-bottom: 10px; background: #eee; position: fixed; z-index: 10; ">
+        <div class="row">
+          <div class="col-xs-12">
+            <form ng-submit="search(0)">
+              <div class="input-group">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{credits[credit]}} <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li ng-repeat="(v, k) in credits"><a href="javascript:" ng-click="setCredit(v)">{{k}}</a></li>
+                  </ul>
+                </div>
+                <input type="text" ng-model="keyword" class="form-control" autofocus>
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="submit">搜索</button>
+                </span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid" ng-if="data.length" style="padding-top: 60px; ">
+        <div class="row">
+          <div class="col-xs-12">
+            <p style="padding: 10px 10px 10px 7px;">
+              总共搜索到 {{count}} 条结果，
+              显示第 {{(currentPage - 1)* pageSize + 1}} - {{currentPage * pageSize > count ? count : currentPage * pageSize}} 记录
+            <p>   
+
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th style="width: 180px; ">ID</th>
+                  <th style="width: 100px; ">发布时间</th>
+                  <th style="width: 80px; ">关注</th>
+                  <th style="width: 60px; ">奖励</th>
+                  <th>标题</th>                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="row in data">
+                  <td>{{row.wooyun_id}}</td>
+                  <td>{{row.datetime.sec * 1000 | date:'yyyy-MM-dd'}}</td>
+                  <td>{{row.attention_num}}</td>
+                  <td>
+                    <img ng-src="images/{{row.credit}}.png" ng-if="row.credit" style="margin-top: -3px; height: 13px; ">
+                  </td>
+                  <td class="wy_title">
+                    <a target="_blank" ng-href="view.php?id={{row.wooyun_id}}">
+                      {{row.title}}
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <paging
+                page="currentPage" 
+                page-size="pageSize" 
+                total="count"
+                paging-action="search(page)">
+            </paging> 
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script src="js/main.js"></script>
+  </body>
+</html>
