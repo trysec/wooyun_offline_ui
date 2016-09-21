@@ -1,4 +1,6 @@
 <?php
+include (dirname (__FILE__) . '/config.php');
+
 $_POST = json_decode(file_get_contents('php://input'), true);
 $limit = intval(@$_POST['limit']);
 $skip  = intval(@$_POST['skip']);
@@ -6,16 +8,22 @@ if ($skip < 0) {
     $skip = 0;
 }
 
-$conn = new MongoClient('mongodb://127.0.0.1:27017');
+$conn = new MongoClient($config['mongodb']);
 $col  = $conn->wooyun->bugs;
 
-$where = array();
+$where = array(
+    '$and' => array()
+);
 if (isset($_POST['credit']) && $_POST['credit'] != 'any') {
-    $where['credit'] = $_POST['credit'];
+    $where['$and'][] = array('credit' => $_POST['credit']);
 }
 if (isset($_POST['keyword'])) {
-    $where['title'] = new MongoRegex('/' . $_POST['keyword'] . '/');
+    $where['$and'][] = array('$or' => array(
+        array('title'     => new MongoRegex('/' . $_POST['keyword'] . '/i')),
+        array('wooyun_id' => new MongoRegex('/' . $_POST['keyword'] . '/i'))
+    ));
 }
+// var_dump ($where);
 
 $cursor = $col->find(
     $where,
