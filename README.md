@@ -15,9 +15,6 @@
 
 ![alt tag](https://raw.githubusercontent.com/CaledoniaProject/wooyun_offline_ui/master/contrib/screen2.jpg)
 
-## 数据
-
-由于政策风险，我不能提供数据，可以用网上的14GB虚拟机导出，并执行 `src/scripts/transform.php` 添加缺失的字段
 
 ## 安装
 
@@ -42,6 +39,8 @@ mongo 默认为 `127.0.0.1:27017`，如有不同，修改 `src/config.php` 即�
 ## 导入数据
 
 导入到 `wooyun` 数据库，`bugs` 表即可
+
+由于政策风险，我不能提供数据，可以用网上的14GB虚拟机导出
 
 然后使用 `src/scripts/minify.pl` 精简 mongo 数据库
 
