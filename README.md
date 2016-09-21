@@ -46,6 +46,7 @@ mongo 默认为 `127.0.0.1:27017`，如有不同，修改 `src/config.php` 即�
 
 ## 已知问题
 
-缺少 `images/blood.png`
+1. 缺少 `images/blood.png`
+2. 漏洞库不全，可惜没用高权限账号爬
 
 
