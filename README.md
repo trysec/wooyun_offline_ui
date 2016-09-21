@@ -2,7 +2,7 @@
 
 花了10分钟重做了一套乌云离线Web UI，重做总共有两个目的，
 
-1. 完全没必要使用网上流行的14GB的虚拟机，mongo 数据导出后，40k漏洞压缩完也只有 20MB 而已（导入 mongo 后500MB)
+1. 没必要使用14GB的虚拟机，经过处理，40K漏洞只占用500MB mongodb 硬盘空间
 2. 上述作者没有提取 关注数、是否为有奖励或者漏洞预警的漏洞 等几个关键字段
 
 ## 特性
@@ -11,7 +11,7 @@
 
 ![alt tag](https://raw.githubusercontent.com/CaledoniaProject/wooyun_offline_ui/master/contrib/screen.jpg)
 
-支持漏洞查看（删除了评论），原始 wooyun UI 哦
+支持漏洞查看（删除了评论），原始 wooyun UI
 
 ![alt tag](https://raw.githubusercontent.com/CaledoniaProject/wooyun_offline_ui/master/contrib/screen2.jpg)
 
@@ -38,6 +38,12 @@ mongo 默认为 `127.0.0.1:27017`，如有不同，修改 `src/config.php` 即�
 	);
 ?>
 ```
+
+## 导入数据
+
+导入到 `wooyun` 数据库，`bugs` 表即可
+
+然后使用 `src/scripts/minify.pl` 精简 mongo 数据库
 
 ## 已知问题
 
